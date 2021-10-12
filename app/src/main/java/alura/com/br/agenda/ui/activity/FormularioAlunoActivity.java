@@ -4,9 +4,12 @@ import static alura.com.br.agenda.ui.activity.ConstantesActivities.CHAVE_ALUNO;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import alura.com.br.agenda.R;
@@ -28,8 +31,28 @@ public class FormularioAlunoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario_aluno);
         inicializacaoDosCampos();
-        configuraBotaoSalvar();
         carregaAluno();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_formulario_aluno_menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+
+        if(itemId == R.id.activity_formulario_aluno_menu_salvar){
+            finalizaFormulario();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void carregaAluno() {
@@ -44,13 +67,6 @@ public class FormularioAlunoActivity extends AppCompatActivity {
         }
     }
 
-    private void configuraBotaoSalvar() {
-        Button botaoSalvar= findViewById(R.id.activity_formulario_aluno_botao_salvar);
-        botaoSalvar.setOnClickListener(view -> {
-            finalizaFormulario();
-        });
-    }
-
     private void finalizaFormulario() {
         preencheCampos();
         if (aluno.temIdValido()){
@@ -61,11 +77,6 @@ public class FormularioAlunoActivity extends AppCompatActivity {
             dao.salva(aluno);
         }
         finish();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
     }
 
     private void preencheCampos() {

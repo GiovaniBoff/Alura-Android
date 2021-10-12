@@ -33,13 +33,6 @@
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         />
-    <Button
-        android:id="@+id/activity_formulario_aluno_botao_salvar"
-        android:layout_width="match_parent"
-        android:layout_margin="8dp"
-        android:layout_height="wrap_content"
-        android:hint="Salvar"
-        android:textColorHint="@color/white"/>
 
 </LinearLayout>
 </ScrollView>
